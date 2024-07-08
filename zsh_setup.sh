@@ -1,9 +1,4 @@
-# Update and upgrade
-sudo apt update && sudo apt upgrade -y 
-
-# Install zsh
-sudo apt install zsh -y
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+#!/bin/zsh
 
 # Make risto theme default for ohmyzsh
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="risto"/g' ~/.zshrc
