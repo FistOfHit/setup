@@ -7,10 +7,10 @@ if grep -q "TODO" "$0"; then
     exit 1
 fi
 
-CUDA_VERSION=TODO  # This must be set manually before running the script
+CUDA_VERSION=TODO
 CUDA_PATH="/usr/local/cuda-${CUDA_VERSION}"
 GDSIO_PATH="${CUDA_PATH}/tools/gdsio"
-FIO_FILES_PATH=TODO  # Update this to your fio files path
+FIO_FILES_PATH=TODO
 
 # Check for pre-requisites
 echo "Checking for pre-requisites..."
