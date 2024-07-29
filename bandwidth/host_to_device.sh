@@ -34,6 +34,7 @@ main() {
 
     # Run benchmarks
     run_benchmark "host -> device" "./nvbandwidth -t host_to_device_memcpy_sm"
+    run_benchmark "host -> device" "./nvbandwidth -t device_to_host_memcpy_sm"
 
     # Return to original directory
     cd - > /dev/null
