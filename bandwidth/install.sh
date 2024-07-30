@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
@@ -17,13 +16,13 @@ if ! command_exists nvcc; then
     exit 1
 fi
 
-# Print CUDA version
 cuda_version=$(nvcc --version | grep "release" | awk '{print $5}' | cut -d',' -f1)
 echo "CUDA version: $cuda_version"
 
-# Clone the repository
 git clone https://github.com/NVIDIA/nvbandwidth.git
 cd nvbandwidth
 
-# Use in build dependency installation and building
+# Use their in-built dependency installation and building script
 sudo ./debian_install.sh
+
+cd - > /dev/null
