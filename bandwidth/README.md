@@ -10,8 +10,10 @@ Includes:
     - `all to one` - all devices -> one device and one device -> all devices bandwidth simultaneously for all devices across the entire system at once
     - `latency` - host -> device and device -> device latency for all devices across the entire system individually
 
-Note:
-On installing nvbandwidth, there may be Cmake issues with the version being too old. Purge, and use the link below to install a later version (post 3.20). Then retry.
+Notes:
+- On installing nvbandwidth, there may be Cmake issues with the version being too old. Purge, and use the link below to install a later version (post 3.20). Then retry.
+- When installing a newer cmake from source, you may have to install openSSL, this error should be seen in the `./configure` step
+- If the CMakeLists.txt file needs to be modified to manually set the CUDA_ARCHITECTURE variable, this can be found by multiplying the output of `nvidia-smi --query-gpu=compute_cap --format=csv,noheader` by 10
 
 Following these sources:
 - [Nvbandwidth repo](https://github.com/NVIDIA/nvbandwidth/tree/main)
