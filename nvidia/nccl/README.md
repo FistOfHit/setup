@@ -16,3 +16,4 @@ Installation and benchmarking scripts for Nvidia device/host bandwidth
 
 - [NCCL test repo](https://github.com/NVIDIA/nccl-tests/tree/master?tab=readme-ov-file)
 - [NCCL repo](https://github.com/nvidia/nccl)
+- [NCCL home dir example](https://github.com/NVIDIA/nccl-tests/issues/81)
