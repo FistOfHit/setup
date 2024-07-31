@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 NVBANDWIDTH_DIR="./nvbandwidth"
 
 run_benchmark() {

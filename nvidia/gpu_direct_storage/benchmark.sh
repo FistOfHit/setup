@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Search and replace all TODOs with appropriate values
 # Check if TODOs haven't been replaced and refuse to run otherwise
 if grep -q "TODO" "$0"; then

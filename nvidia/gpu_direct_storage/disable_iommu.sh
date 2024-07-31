@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to disable IOMMU
+set -euo pipefail
 
 # Check if script is run with sudo
 if [ "$EUID" -ne 0 ]; then

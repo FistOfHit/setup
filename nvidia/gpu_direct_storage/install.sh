@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Install GDS on ubuntu
 
 # Search and replace all TODOs with appropriate values
