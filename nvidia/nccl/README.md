@@ -1,11 +1,21 @@
 # NCCL
 
-Installation and benchmarking scripts for Nvidia device/host bandwidth
+Installation and benchmarking scripts for NCCL
 
 ## Includes
 
 - `install.sh` - Installing the NCCL test suite
 - `benchmark.sh` - Run all benchmarks including:
+    - all_reduce
+    - all_gather
+    - broadcast
+    - reduce_scatter
+    - reduce
+    - alltoall
+    - scatter
+    - gather
+    - sendrecv
+    - hypercube
 
 ## Notes
 
