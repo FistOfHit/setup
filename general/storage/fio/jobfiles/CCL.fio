@@ -1,0 +1,97 @@
+[global]
+# CCL's parameters
+ioengine=libaio
+direct=1
+iodepth=8
+blocksize=1024k
+threads=128
+# Other appropriate options
+numjobs=16 # This should be set such that numjobs * iodepth = threads
+size=100G
+ramp_time=60
+randrepeat=0
+log_avg_msec=1000
+# Additional global options
+group_reporting
+thread
+norandommap
+write_bw_log
+write_lat_log
+write_iops_log
+# Enforce all jobs ending within given time
+time_based
+runtime=600
+# TODO: Modify this to the mount point of the filesystem
+directory=/path/to/parallel/filesystem/mount
+
+# Test sequential read performance
+# This job assesses how quickly the filesystem can read large amounts of data in a sequential manner
+# Useful for understanding performance in scenarios like large file transfers or streaming operations
+[sequential-read]
+rw=read
+stonewall
+
+# Test sequential write performance
+# This job evaluates how fast the filesystem can write large amounts of data sequentially
+# Important for scenarios such as large file creation, backups, or log writing
+[sequential-write]
+rw=write
+stonewall
+
+# Test random read performance with small blocks
+# This job simulates random access patterns with small data chunks, common in many applications
+# Crucial for understanding performance in database or virtualization environments
+[random-read]
+rw=randread
+blocksize=4k
+stonewall
+
+# Test random write performance with small blocks
+# This job evaluates how the filesystem handles small, scattered write operations
+# Important for scenarios like database updates or small file creation in busy directories
+[random-write]
+rw=randwrite
+blocksize=4k
+stonewall
+
+# Test mixed read/write performance
+# This job simulates a more realistic workload with both read and write operations
+# Useful for understanding filesystem performance under varied, real-world-like conditions
+[mixed-readwrite]
+rw=randrw
+rwmixread=70
+blocksize=8k
+stonewall
+
+# Test performance with many small files
+# This job creates and operates on numerous small files, stressing the filesystem's metadata operations
+# Important for scenarios like web servers, mail servers, or source code repositories
+[small-files]
+rw=randrw
+rwmixread=60
+blocksize=4k
+size=10M
+nrfiles=1000
+stonewall
+
+# Test performance with a few large files
+# This job operates on a small number of large files, assessing how the filesystem handles big data
+# Relevant for scenarios like video streaming, scientific computing, or data warehousing
+[large-files]
+rw=randrw
+rwmixread=60
+blocksize=1M
+size=1G
+nrfiles=10
+stonewall
+
+# Test metadata-intensive operations
+# This job creates a very large number of tiny files, heavily stressing the filesystem's metadata handling
+# Critical for understanding performance in scenarios with many small files or frequent file creation/deletion
+[metadata-intensive]
+rw=randwrite
+blocksize=4k
+size=4k
+nrfiles=100000
+openfiles=1000
+stonewall

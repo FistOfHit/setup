@@ -1,0 +1,73 @@
+[global]
+ioengine=libaio
+direct=1
+iodepth=4
+numjobs=4
+size=1G
+ramp_time=5
+runtime=60
+time_based
+group_reporting
+thread
+write_bw_log
+write_lat_log
+write_iops_log
+log_avg_msec=1000
+# TODO: Modify this to your test directory
+directory=/path/to/test/directory
+
+# Test sequential read performance
+# Simulates reading large files, like opening videos or large documents
+[sequential-read]
+rw=read
+bs=128k
+stonewall
+
+# Test sequential write performance
+# Simulates writing large files, like saving videos or creating backups
+[sequential-write]
+rw=write
+bs=128k
+stonewall
+
+# Test random read performance
+# Simulates accessing small parts of files, common in application loading
+[random-read]
+rw=randread
+bs=4k
+stonewall
+
+# Test random write performance
+# Simulates small file updates, common in everyday computer use
+[random-write]
+rw=randwrite
+bs=4k
+stonewall
+
+# Test mixed read/write performance
+# Simulates typical desktop usage with both reads and writes
+[mixed-readwrite]
+rw=randrw
+rwmixread=70
+bs=8k
+stonewall
+
+# Test performance with many small files
+# Simulates working with lots of small files, like in a documents folder
+[small-files]
+rw=randrw
+rwmixread=60
+bs=4k
+size=10M
+nrfiles=100
+stonewall
+
+# Test metadata operations
+# Simulates file management operations like listing directories
+[metadata-intensive]
+rw=randwrite
+bs=4k
+size=4k
+nrfiles=10000
+openfiles=100
+stonewall
