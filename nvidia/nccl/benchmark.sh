@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # List of NCCL benchmarks
 BENCHMARKS=(
@@ -64,3 +64,5 @@ for benchmark in "${BENCHMARKS[@]}"; do
 done
 
 echo "All benchmarks completed."
+
+set +uo pipefail

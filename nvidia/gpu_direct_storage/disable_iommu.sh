@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Check if script is run with sudo
 if [ "$EUID" -ne 0 ]; then
@@ -43,3 +43,5 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     reboot
 fi
+
+set +uo pipefail

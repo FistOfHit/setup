@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
@@ -67,3 +67,5 @@ echo "Generating detailed performance report..."
 } > dcperf_detailed_report.txt
 
 echo "DCPerf benchmarks completed. Detailed report saved in dcperf_detailed_report.txt"
+
+set +uo pipefail

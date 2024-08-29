@@ -2,19 +2,13 @@
 ioengine=libaio
 direct=1
 iodepth=4
-numjobs=4
+numjobs=1
 size=1G
-ramp_time=5
-runtime=60
+runtime=10
 time_based
-group_reporting
 thread
-write_bw_log
-write_lat_log
-write_iops_log
-log_avg_msec=1000
 # TODO: Modify this to your test directory
-directory=/path/to/test/directory
+directory=/path/to/parallel/filesystem/mount
 
 # Test sequential read performance
 # Simulates reading large files, like opening videos or large documents
@@ -60,14 +54,4 @@ rwmixread=60
 bs=4k
 size=10M
 nrfiles=100
-stonewall
-
-# Test metadata operations
-# Simulates file management operations like listing directories
-[metadata-intensive]
-rw=randwrite
-bs=4k
-size=4k
-nrfiles=10000
-openfiles=100
 stonewall

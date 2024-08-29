@@ -1,6 +1,6 @@
 #!bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
@@ -42,3 +42,5 @@ echo "* hard nofile 65536" >> /etc/security/limits.conf
 ./benchpress_cli.py install spark_standalone
 
 echo "DCPerf installation complete. Please refer to the individual benchmark READMEs for specific configuration and execution instructions."
+
+set +uo pipefail

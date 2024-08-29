@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -28,3 +28,5 @@ cd nvbandwidth
 sudo ./debian_install.sh
 
 cd - > /dev/null
+
+set +uo pipefail

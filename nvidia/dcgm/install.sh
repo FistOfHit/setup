@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 CUDA_VERSION=
 
@@ -22,3 +22,5 @@ sudo apt-get install -y libnvidia-nscq-$CUDA_VERSION
 # Enable and verify
 sudo systemctl --now enable nvidia-dcgm
 dcgmi discovery -l
+
+set +uo pipefail

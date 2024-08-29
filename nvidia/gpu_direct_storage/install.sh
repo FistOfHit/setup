@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Install GDS on ubuntu
 
@@ -41,3 +41,5 @@ sudo /bin/nvidia-relaxed-ordering-nvme.sh enable
 # Verify installation
 echo "Verifying installation"
 ${CUDA_PATH}/gds/tools/gdscheck.py -p
+
+set +uo pipefail

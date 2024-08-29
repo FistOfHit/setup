@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 git clone https://github.com/NVIDIA/nccl.git
 
@@ -13,3 +13,5 @@ make pkg.debian.build
 
 # Return to original directory
 cd - > /dev/null
+
+set +uo pipefail

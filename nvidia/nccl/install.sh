@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Set default MPI_HOME
 MPI_HOME=${MPI_HOME:-/usr/lib/x86_64-linux-gnu/mpich}
@@ -13,3 +13,5 @@ make MPI=1 MPI_HOME=$MPI_HOME
 
 # Return to original directory
 cd - > /dev/null
+
+set +uo pipefail

@@ -1,6 +1,6 @@
 #!bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 if ! dpkg -s libaio-dev &> /dev/null; then
     sudo apt-get install -y libaio-dev
@@ -16,3 +16,5 @@ sudo make
 sudo make install
 
 cd - > /dev/null
+
+set +uo pipefail

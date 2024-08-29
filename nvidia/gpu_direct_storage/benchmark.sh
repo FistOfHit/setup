@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Search and replace all TODOs with appropriate values
 # Check if TODOs haven't been replaced and refuse to run otherwise
@@ -55,3 +55,5 @@ run_benchmark "Storage -> CPU -> GPU" "fio-seq-writes-1" 2
 gdsio -D TODO -d 2 -w 8 -s 1G -i 1M -x 0 -I 0 -T 300 &
 GDS_STATS_PID=$!
 gds_stats -p $GDS_STATS_PID -l 3
+
+set +uo pipefail

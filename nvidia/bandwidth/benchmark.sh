@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 NVBANDWIDTH_DIR="./nvbandwidth"
 
@@ -64,4 +64,4 @@ main() {
 
 main
 
-exit 0
+set +uo pipefail

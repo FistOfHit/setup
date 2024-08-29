@@ -1,6 +1,6 @@
 #!bin/bash
 
-set -euo pipefail
+set -uo pipefail
 
 # Check if autoconf and pkg-config are installed, else install them
 if ! command -v autoconf &> /dev/null; then
@@ -18,3 +18,5 @@ cd io500
 ./prepare.sh
 
 cd - > /dev/null
+
+set +uo pipefail
