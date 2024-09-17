@@ -28,6 +28,11 @@ make install
 cd ..
 rm openmpi-5.0.5.tar.gz
 
+# Update env vars for OpenMPI
+export MPI_HOME=$HOME/opt/OpenMPI
+export PATH=$PATH:$MPI_HOME/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPI_HOME/lib
+
 # Download HPL
 wget https://netlib.org/benchmark/hpl/hpl-2.3.tar.gz
 tar xzf hpl-2.3.tar.gz
@@ -40,11 +45,20 @@ sh make_generic
 cp Make.UNKNOWN ../Make.linux
 cd ..
 
+# Modify contents of Make.linux - Only for machines where we installed 
+# OpenMPI and OpenBLAS ourselves, not datacenter machines with OS's
+# That have proprietary versions pre-installed
+sed -i 's/^ARCH\s*=.*/ARCH          = linux/' Make.linux
+sed -i 's|^MPdir\s*=.*|MPdir        = $(HOME)/opt/OpenMPI|' Make.linux
+sed -i 's|^MPinc\s*=.*|MPinc        = -I$(MPdir)/include|' Make.linux
+sed -i 's|^MPlib\s*=.*|MPlib        = $(MPdir)/lib/libmpi.so|' Make.linux
+sed -i 's|^LAdir\s*=.*|LAdir        = $(HOME)/opt/OpenBLAS|' Make.linux
+sed -i 's/^LAinc\s*=.*/LAinc        =/' Make.linux
+sed -i 's|^LAlib\s*=.*|LAlib        = $(LAdir)/lib/libopenblas.a|' Make.linux
 
+# Finally, make the benchmark
+make arch=linux
 
-# Update env vars for OpenMPI
-export MPI_HOME=$HOME/opt/OpenMPI
-export PATH=$PATH:$MPI_HOME/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPI_HOME/lib
+echo "Benchmarks ready, please check or configure HPL.dat in ./bin/linux to run"
 
 set +uo pipefail
