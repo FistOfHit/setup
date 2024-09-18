@@ -11,27 +11,28 @@ fi
 # Install pre-requisites
 sudo apt install build-essential hwloc libhwloc-dev libevent-dev gfortran
 
+# Set install paths for libs and hpl
+CURRENT_DIR=$(pwd)
+export MPI_HOME=$CURRENT_DIR/opt/OpenMPI
+export PATH=$PATH:$MPI_HOME/bin
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MPI_HOME/lib
+
 # Install OpenBLAS
 git clone https://github.com/xianyi/OpenBLAS.git
 cd OpenBLAS
-make
-make PREFIX=$HOME/opt/OpenBLAS install
+make -j 4 # Can modify this if you have the resouces for more parallelism in this step
+make PREFIX=$CURRENT_DIR/opt/OpenBLAS install
 cd ..
 
 # Install OpenMPI
 wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.5.tar.gz
 tar xzf openmpi-5.0.5.tar.gz
 cd openmpi-5.0.5
-CFLAGS="-Ofast -march=native" ./configure --prefix=$HOME/opt/OpenMPI
-make -j 4
+CFLAGS="-Ofast -march=native" ./configure --prefix=$CURRENT_DIR/opt/OpenMPI
+make -j 4 # Can modify this if you have the resouces for more parallelism in this step
 make install
 cd ..
 rm openmpi-5.0.5.tar.gz
-
-# Update env vars for OpenMPI
-export MPI_HOME=$HOME/opt/OpenMPI
-export PATH=$PATH:$MPI_HOME/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPI_HOME/lib
 
 # Download HPL
 wget https://netlib.org/benchmark/hpl/hpl-2.3.tar.gz

@@ -8,7 +8,11 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+RUN_PATH=hpl/bin/linux
 
-echo "Benchmark complete"
+cp config_files/test.dat $RUN_PATH/HPL.dat
+./${RUN_PATH}/xhpl
+
+echo "Test benchmark complete"
 
 set +uo pipefail
