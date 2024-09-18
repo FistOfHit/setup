@@ -5,7 +5,7 @@ Installation and benchmarking scripts for the open source HPL benchmarking suite
 ## Includes
 
 - `install.sh` - Installing the HPL suite, as well as OpenMPI and OpenBLAS (might want to modify on DC or other already-running systems)
-- `benchmark.sh` - Run the HPL benchmark
+- `run_test_benchmark.sh` - Run the HPL test benchmark
 
 ## Notes
 
