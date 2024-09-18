@@ -1,6 +1,6 @@
 # HPL - High Performance Linpack
 
-Installation and benchmarking scripts for the open source HPL benchmarking suite, widely used for [top500](https://top500.org/) supercomputer benchmarking
+Installation and test benchmarking scripts for the open source HPL benchmarking suite, widely used for [top500](https://top500.org/) supercomputer benchmarking
 
 ## Includes
 
