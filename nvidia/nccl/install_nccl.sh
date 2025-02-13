@@ -2,16 +2,22 @@
 
 set -uo pipefail
 
-git clone https://github.com/NVIDIA/nccl.git
+apt-get update
 
-# Build and install
-cd nccl
+# Install NCCL
+apt-get install libnccl2=2.23.4-1+cuda12.6 libnccl-dev=2.23.4-1+cuda12.6 # Check if this is the correct version for your CUDA install
 
-make -j src.build
-sudo apt install build-essential devscripts debhelper fakeroot
-make pkg.debian.build
+# Install NVIDIA Fabric Manager
+apt-get install -y nvidia-fabricmanager-565 # Check if this is the correct version for your CUDA install
 
-# Return to original directory
-cd - > /dev/null
+# Start the fabric manager and enable it to start on boot
+systemctl start nvidia-fabricmanager
+systemctl enable nvidia-fabricmanager
+
+echo "Installation complete. Would you like to reboot now? (y/n)"
+read -r REBOOT
+if [ "$REBOOT" = "y" ]; then
+    reboot
+fi
 
 set +uo pipefail

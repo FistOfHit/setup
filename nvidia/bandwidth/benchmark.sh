@@ -4,16 +4,18 @@ set -uo pipefail
 
 NVBANDWIDTH_DIR="./nvbandwidth"
 
+nvidia-smi
+
 run_benchmark() {
     local benchmark_name="$1"
     local benchmark_command="$2"
     
-    echo "\tRunning benchmark: $benchmark_name"
+    echo -e "\tRunning benchmark: $benchmark_name"
     if ! $benchmark_command; then
-        echo "\tError: Benchmark '$benchmark_name' failed." >&2
+        echo -e "\tError: Benchmark '$benchmark_name' failed." >&2
         return 1
     fi
-    echo "\tBenchmark '$benchmark_name' completed successfully."
+    echo -e "\tBenchmark '$benchmark_name' completed successfully."
     echo
 }
 

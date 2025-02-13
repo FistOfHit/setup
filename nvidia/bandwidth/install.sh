@@ -6,6 +6,10 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+export PATH=/usr/local/cuda/bin:${PATH:-}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH:-}
+export CUDACXX=/usr/local/cuda/bin/nvcc
+
 # Check for CUDA-enabled GPU and compatible NVIDIA driver
 if ! command_exists nvidia-smi; then
     echo "Error: NVIDIA GPU driver not found. Please install a compatible NVIDIA driver."

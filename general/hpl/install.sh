@@ -1,19 +1,12 @@
-#!bin/bash
+#!/bin/bash
 
 set -uo pipefail
 
-# Check if running as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root"
-  exit 1
-fi
-
 # Install pre-requisites
-sudo apt install build-essential hwloc libhwloc-dev libevent-dev gfortran
+sudo apt install -y build-essential hwloc libhwloc-dev libevent-dev gfortran
 
 # Set install paths for libs and hpl
-CURRENT_DIR=$(pwd)
-export MPI_HOME=$CURRENT_DIR/opt/OpenMPI
+export MPI_HOME=$HOME/opt/OpenMPI
 export PATH=$PATH:$MPI_HOME/bin
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MPI_HOME/lib
 
@@ -21,14 +14,19 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MPI_HOME/lib
 git clone https://github.com/xianyi/OpenBLAS.git
 cd OpenBLAS
 make -j 4 # Can modify this if you have the resouces for more parallelism in this step
-make PREFIX=$CURRENT_DIR/opt/OpenBLAS install
+make PREFIX=$HOME/opt/OpenBLAS install
 cd ..
+
+# Install ZLIB
+sudo apt install -y zlib1g-dev
+export PATH=$PATH:/usr/lib/x86_64-linux-gnu
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}/usr/lib/x86_64-linux-gnu
 
 # Install OpenMPI
 wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.5.tar.gz
 tar xzf openmpi-5.0.5.tar.gz
 cd openmpi-5.0.5
-CFLAGS="-Ofast -march=native" ./configure --prefix=$CURRENT_DIR/opt/OpenMPI
+CFLAGS="-Ofast -march=native" ./configure --prefix=$HOME/opt/OpenMPI
 make -j 4 # Can modify this if you have the resouces for more parallelism in this step
 make install
 cd ..
@@ -37,11 +35,11 @@ rm openmpi-5.0.5.tar.gz
 # Download HPL
 wget https://netlib.org/benchmark/hpl/hpl-2.3.tar.gz
 tar xzf hpl-2.3.tar.gz
-mv hpl-2.3 ~/hpl
+mv hpl-2.3 $HOME/hpl
 rm hpl-2.3.tar.gz
 
 # Configure HPL
-cd hpl/setup
+cd $HOME/hpl/setup
 sh make_generic
 cp Make.UNKNOWN ../Make.linux
 cd ..

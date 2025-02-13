@@ -1,0 +1,16 @@
+# Use the NVIDIA HPC Benchmarks image as the base
+ARG BASE_IMAGE=nvcr.io/nvidia/hpc-benchmarks
+ARG BASE_TAG=24.09
+FROM ${BASE_IMAGE}:${BASE_TAG}
+
+# Set the working directory
+WORKDIR /workspace
+
+# benchmark and data files
+COPY ./config_files/custom_HPL-GPU.dat /workspace/custom_HPL-GPU.dat
+
+RUN apt-get update && apt-get install -y openmpi-bin libopenmpi-dev
+
+# Set the default command to run when the container starts
+CMD ["bash"]
+

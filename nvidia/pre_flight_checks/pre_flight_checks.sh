@@ -54,6 +54,36 @@ check_cuda_libraries() {
     echo 
 }
 
+check_nvidia_toolkit() {
+    log_message "Checking NVIDIA Container Toolkit..."
+    if dpkg -s nvidia-container-toolkit &> /dev/null; then
+        log_message "NVIDIA Container Toolkit is installed."
+    else
+        log_message "Error: NVIDIA Container Toolkit not found."
+    fi
+    echo 
+}
+
+check_cuda_toolkit() {
+    log_message "Checking if CUDA Toolkit is available..."
+    if dpkg -s cuda-toolkit-12-6 &> /dev/null; then
+        log_message "CUDA Toolkit is installed."
+    else
+        log_message "Error: CUDA Toolkit not found."
+    fi
+    echo 
+}
+
+check_nvidia_fabric_manager() {
+    log_message "Checking NVIDIA Fabric Manager..."
+    if dpkg -s nvidia-fabricmanager &> /dev/null; then
+        log_message "NVIDIA Fabric Manager is installed."
+    else
+        log_message "Error: NVIDIA Fabric Manager not found."
+    fi
+    echo 
+}
+
 check_mpi_version() {
     log_message "Checking MPI versions..."
     if command -v mpirun &> /dev/null; then
